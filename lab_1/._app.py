@@ -1,14 +1,10 @@
-import secrets
-from flask import Flask, abort, render_template, request, redirect, url_for, session, g, flash
+from flask import Flask, render_template, request, redirect, url_for, session, g, flash
 import sqlite3
 import os
 import urllib.parse
-import html
 
 app = Flask(__name__)
 app.secret_key = "dev-secret-key-please-change"  # untuk lab saja
-
-
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASE = os.path.join(BASE_DIR, "app.db")
@@ -47,7 +43,8 @@ def login():
         password = request.form.get("password", "")
 
         db = get_db()
-        cur = db.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+        query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
+        cur = db.execute(query)
         user = cur.fetchone()
 
         if user:
@@ -97,11 +94,9 @@ def profile():
     db = get_db()
     user_id = session["user_id"]
     if request.method == "POST":
-
         # allow user to post a comment (stored, no sanitization -> XSS)
 
         comment = request.form.get("comment", "")
-        comment = html.escape(comment)
         db.execute("INSERT INTO comments (user_id, comment) VALUES (?, ?)", (user_id, comment))
         db.commit()
         flash("Komentar ditambahkan", "success")
@@ -120,13 +115,6 @@ def transfer():
     db = get_db()
     user_id = session["user_id"]
     account = db.execute("SELECT * FROM accounts WHERE user_id = ?", (user_id,)).fetchone()
-
-    if 'csrf' not in session:
-        session['csrf'] = secrets.token_hex(32)
-    token = request.form.get('csrf')
-
-    if not token or token != session['csrf']:
-        abort(403)
 
     if request.method == "POST":
         to_user = request.form.get("to_user")

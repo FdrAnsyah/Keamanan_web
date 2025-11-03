@@ -1,65 +1,73 @@
 # Keamanan Web - Vulnerable Flask Application Lab
 
-This is a vulnerable Flask application provided for security testing and educational purposes. The application contains several common web security vulnerabilities for students to identify and exploit in a controlled environment.
+Ini adalah sebuah Aplikasi yang memiliki kerentanan yang sengaja dibuat untuk tujuan pembelajaran. Aplikasi ini mengandung beberapa kerentanan web umum untuk diidentikasi oleh mahasiswa dan di eksploitasi di local server.
+
 
 ## Quick Start
 
-### Option 1: Run with Python directly
+### Opsi 1: Run menggunakan Flask
+1. Clone repository:
+   ```bash
+   git clone https://github.com/FdrAnsyah/Keamanan_web
+   ```
 
-1. Navigate to the lab directory:
+2. Pindah directory ke lab_1:
    ```bash
    cd lab_1
    ```
 
-2. Install dependencies:
+3. Install flask:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Initialize the database:
+4. Inisiasi database:
    ```bash
    python db_init.py
    ```
 
-4. Run the application:
-   ```bash
-   python app.py
-   ```
-   
-   Or using flask command:
+5. Run menggunakan flask:
    ```bash
    flask run
    ```
+6. Buka browser dan ketik:
+   ```bash
+   `http://127.0.0.1:5000`
+   ```
 
-5. Open your browser and go to `http://127.0.0.1:5000`
+### Opsi 2: Run menggunakan Docker
+1. Clone repository:
+   ```bash
+   git clone https://github.com/FdrAnsyah/Keamanan_web
+   ```
 
-### Option 2: Run with Docker
-
-1. Navigate to the lab directory:
+2. Pindah directory ke lab_1:
    ```bash
    cd lab_1
    ```
 
-2. Build and run the Docker container:
+
+3. Run menggunakan Docker container:
    ```bash
    docker-compose up --build
    ```
 
-3. Open your browser and go to `http://127.0.0.1:5000`
+4. Buka browser dan ketik:
+   ```bash
+   http://127.0.0.1:5000
+   ```
 
 ## Default Credentials
 
-The application comes with pre-populated user accounts:
+Aplikasi ini memiliki akun user yang sudah dibuat sebelumnya:
 
 - Username: `alice`, Password: `password123` (Regular user)
-- Username: `bob`, Password: `mypassword` (Regular user) 
+- Username: `bob`, Password: `mypassword` (Regular user)
 - Username: `admin`, Password: `adminpass` (Admin user)
 
 ## Lab Instructions
 
-Use this application to practice identifying and exploiting common web vulnerabilities using tools like:
-- SQLMap for SQL injection
-- Burp Suite or OWASP ZAP for general testing
+Gunakan aplikasi ini untuk belajar mengidentifikasi dan eksploitasi kerentanan web umum menggunakan tools seperti:
+- SQLMap untuk SQL injection
+- Burp Suite or OWASP ZAP untuk test umum
 - Manual testing techniques
-
-⚠️ WARNING: This application contains intentional security vulnerabilities and should never be deployed in a production environment. It is designed solely for educational purposes in a controlled lab setting.
